@@ -174,13 +174,14 @@ const reloadCard = () => {
 }
 
 const changeQuantity = (key, quantity) => {
-    if(quantity == 0){
-        delete listCards[key];
+    if (quantity == 0) {
+      delete listCards[key];
+      total.innerText = "0";
+    } else {
+      listCards[key].quantity = quantity;
+      listCards[key].price = quantity * prodcuts[key].price;
     }
-    else{
-        listCards[key].quantity = quantity;
-        listCards[key].price = quantity * prodcuts[key].price;
-    }
+  
+    reloadCard();
 
-    reloadCard()
-}
+  };
