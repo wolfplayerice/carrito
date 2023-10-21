@@ -25,7 +25,7 @@ let prodcuts = [
         <b>Memoria:</b> SSD 512GB<br>
         `,
         price: 728
-        ,
+        
     },
 
     {
@@ -103,22 +103,20 @@ let listCards = [];
 const initApp = () =>{
     prodcuts.forEach((value, key) => {
         let newDiv = document.createElement("div");
-        newDiv.classList.add("item");
+        newDiv.classList.add("cartas");
         
         newDiv.innerHTML = `
 
 
-                <div class="cartas">
-                <div class="img">
-                    <img src="img/${value.images}">
-                </div>
+                    <div class="img">
+                        <img src="img/${value.images}">
+                    </div>
 
-                <div class="informacion">
-                    <div class="title"> <h2>${value.name}</h2> </div>
-                    <p>${value.info}</p>
-                <div class="price">${value.price.toLocaleString()}</div>
-                    <button onclick="addToCard(${key})">Comprar</button>
-                </div>
+                    <div class="informacion">
+                        <div class="title"> <h2>${value.name}</h2> </div>
+                        <p>${value.info}</p>
+                    <div class="price">${value.price.toLocaleString()}</div>
+                        <button onclick="addToCard(${key})">Comprar</button>
 
         `;
         list.appendChild(newDiv)
@@ -139,6 +137,7 @@ const reloadCard = () => {
     listCard.innerHTML = "";
     let count = 0;
     let totalPrice = 0;
+
     listCards.forEach((value, key) => {
         totalPrice = totalPrice + value.price;
         count = count + value.quantity;
@@ -146,22 +145,23 @@ const reloadCard = () => {
         if (value != null){
             let newDiv = document.createElement("li"); 
             newDiv.innerHTML =`
-            <div><img src="img/${value.images}"></div>
-            <div class="cardTitle">${value.name}</div> 
-            <div class="cardPrice">${value.price.toLocaleString()}
-            </div>
+                <div><img src="img/${value.images}"></div>
+                <div class="cardTitle">${value.name}</div> 
+                <div class="cardPrice">${value.price.toLocaleString()}
+                </div>
 
-            <div>
-                <button style="background-color: #560bad" class="cardButton"
-                onclick = "changeQuantity(${key},${value.quantity - 1})"}
-                >-</button>
-            </div>
-            
-            <button style="background-color: #560bad" class="cardButton"
-            onclick = "changeQuantity(${key},${value.quantity + 1}")
-            >+</button>
-            </div>
-            `
+                <div>
+                    <button style="background-color: #20419e" class="cardButton"
+                    onclick = "changeQuantity(${key}, ${value.quantity - 1})"
+                    >-</button>
+                    <div class ="count">${value.quantity}</div>
+                    <button style="background-color: #20419e" class="cardButton"
+                    onclick = "changeQuantity(${key}, ${value.quantity + 1})"
+                    >+</button>
+                </div>
+                
+           
+                `
             listCard.appendChild(newDiv);
         }
 
@@ -175,11 +175,11 @@ const reloadCard = () => {
 
 const changeQuantity = (key, quantity) => {
     if(quantity == 0){
-        delete listCards[key]
+        delete listCards[key];
     }
     else{
-        listCard[key].quantity=quantity;
-        listCards[key].price = quantity * products[key].price
+        listCards[key].quantity = quantity;
+        listCards[key].price = quantity * prodcuts[key].price;
     }
 
     reloadCard()
