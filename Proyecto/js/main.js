@@ -5,6 +5,8 @@ const listCard = document.querySelector(".listCard");
 const total = document.querySelector(".total");
 const body = document.querySelector("body");
 const quantity = document.querySelector(".quantity");
+const comprar = document.querySelector(".venta");
+
 
 openShopping.addEventListener("click", () => 
 { body.classList.add("active")
@@ -13,6 +15,24 @@ closeShopping.addEventListener("click", () =>
 { body.classList.remove("active")
 })
 
+comprar.addEventListener("click", () => {
+    if (listCards.length === 0) {
+      // Mostramos un mensaje de error
+      /* alert("El carrito está vacío"); */
+      Swal.fire({
+        type: 'error',
+        title: 'Oops...',
+        text: 'por favor pasame',
+        showConfirmButton: false,
+        icon: 'error',
+        timer: 2000
+    })
+      return;
+    }
+    localStorage.setItem("listCards", JSON.stringify(listCards));
+    // Si el carrito no está vacío, redirigimos al usuario a la página de compra
+    location.href = "factura.html";
+  });
 let prodcuts = [
     {
         id: 1,
@@ -124,6 +144,8 @@ const initApp = () =>{
 
 }
 
+
+
 initApp()
 
 const addToCard = (key) => {
@@ -131,8 +153,17 @@ const addToCard = (key) => {
         listCards[key] = JSON.parse(JSON.stringify(prodcuts[key])); 
         listCards[key].quantity = 1;
     }
+    if (listCards.length === 0) {
+        // Muestra un error
+        alert("El carrito está vacío");
+        return;
+      }
     reloadCard();
 }
+
+
+
+
 const reloadCard = () => {
     listCard.innerHTML = "";
     let count = 0;
@@ -173,10 +204,20 @@ const reloadCard = () => {
 
 }
 
+const buyButton = document.querySelector(".venta");
+
+if (listCards.length === 0) {
+  buyButton.disabled = true;
+} else {
+  buyButton.disabled = false;
+}
+
+
 const changeQuantity = (key, quantity) => {
     if (quantity == 0) {
       delete listCards[key];
       total.innerText = "0";
+      quantity.innerText= "0";
     } else {
       listCards[key].quantity = quantity;
       listCards[key].price = quantity * prodcuts[key].price;

@@ -15,8 +15,12 @@ html,body{
 
 }
 
+.formulario{
+    color: white;
+}
+
 body{
-    background-image: url('../img/wallpaper.jpg');
+    background-image: url('../img/wallpaper.webp');
     background-size: cover;
 }
 
@@ -117,6 +121,20 @@ body{
     -o-transform: translateX(-200px);
 }
 
+.card{
+    position: fixed;
+    top: 0;
+    left: 100%;
+    width: 500px;
+    background-color: #dadadae8;
+    border-left: 1px solid #0b36ad; 
+    height: 100vh;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+}
 .card h1{
     color: #071e58;
     font-weight: 300;
@@ -295,20 +313,7 @@ body{
 
 
 
-.card{
-    position: fixed;
-    top: 0;
-    left: 100%;
-    width: 500px;
-    background-color: #dadadac4;
-    border-left: 1px solid #0b36ad; 
-    height: 100vh;
-    transition: 0.5s;
-    -webkit-transition: 0.5s;
-    -moz-transition: 0.5s;
-    -ms-transition: 0.5s;
-    -o-transition: 0.5s;
-}
+
 /* para el carrito cuando se despliega */
 
 
